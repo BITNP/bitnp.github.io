@@ -538,26 +538,40 @@ export default {
       .banner-conent
         .features
           display none !important
+        .info-panel 
+          width 90%
+          .intro-main 
+            .intro-img-title 
+              flex 180px 0 0
+              .intro-img 
+                height 60px
 // 419px以下
 @media (max-width $MQMobileNarrow)
   .home-wrapper
-    .banner-conent
-      padding-left 1.5rem
-      padding-right 1.5rem
-      .hero
-        img
-          max-height 210px
-          margin 2rem auto 1.2rem
-        h1
-          font-size 2rem
-        h1, .description, .action
-          margin 1.2rem auto
-        .description
-          font-size 1.2rem
-        .action-button
-          font-size 1rem
-          padding 0.6rem 1.2rem
-      .feature
-        h2
-          font-size 1.25rem
+    .banner 
+      .banner-conent
+        padding-left 1.5rem
+        padding-right 1.5rem
+        .hero
+          img
+            max-height 160px
+            margin 2rem auto 1.2rem
+          h1
+            font-size 1.6rem
+          h1, .description, .action
+            margin 1.2rem auto
+          .description
+            font-size 1.2rem
+          .action-button
+            font-size 1rem
+            padding 0.6rem 1.2rem
+        .info-panel 
+          .intro-main 
+            flex-direction column
+            .intro-img-title 
+              flex calc(60px + 2em) 0 0
+              .intro-img 
+                height 60px
+            .intro-content 
+              margin 0 10px
 </style>

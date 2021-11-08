@@ -3,7 +3,7 @@
         <div class="category-title">
             <p>{{this.categoryName}}</p>
             <p>&gt;更多</p>
-        </div>
+        </div>      
         <div class="article-group">
             <div class="article-lst post card-box"
             v-for="item in sortPosts"
@@ -141,4 +141,18 @@ export default {
         display block
         margin-top auto
         text-align right
+@media (max-width $MQMobile)
+  .article-wrapper
+    .article-group 
+      .card-box
+        flex calc(45% - 48px) 0 0
+        .card-item  
+        &:nth-child(2n+1)
+          margin .9rem 0
+@media (max-width $MQMobileNarrow)
+  .article-wrapper
+    .article-group 
+      .card-box
+        flex calc(90% - 48px) 0 0
+        margin .2rem 5% !important
 </style>
