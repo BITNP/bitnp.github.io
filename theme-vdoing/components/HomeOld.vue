@@ -27,26 +27,102 @@
           <p class="action" v-if="homeData.actionText && homeData.actionLink">
             <NavLink class="action-button" :item="actionLink" />
           </p>
-          <button id="detail-btn">了解更多</button>
         </header>
-        <div class="info-panel">
-          <div class="intro-category">
-            <div class="intro-category-item" :class="introtype==0?'selected':''" @click="introtype=0">服务支持</div>
-            <div class="intro-category-item" :class="introtype==1?'selected':''" @click="introtype=1">部门介绍</div>
-          </div>
-          <div class="intro-main">
-            <div class="intro-img-title">
-              <img class="intro-img" :src="$withBase(getDataItem(introtype,introid).imgUrl)"/>
-              <h2> {{ getDataItem(introtype,introid).title }} </h2>
-            </div>
-            <p class="intro-content"> {{ getDataItem(introtype,introid).content }} </p>
-          </div>
-          <div class="intro-toggle-button-list">
-            <div class="toggle-btn" @click="subItemCnt">&lt;</div>
-            <div class="toggle-btn" @click="addItemCnt">&gt;</div>
+        <div class="introduction">
+          <div :class="'intro-item '+(intro.big ? 'intro-big':'')"
+            v-for="(intro, index) in homeData.introduction"
+            :key="index">
+            <img class="intro-img" :src="$withBase(intro.imgUrl)"/>
+            <h2> {{ intro.title }} </h2>
+            <p> {{intro.content}} </p>
           </div>
         </div>
+
+        <div class="departments">
+          <div :class="'depart-item '+(intro.big ? 'depart-big':'')"
+            v-for="(intro, index) in homeData.departments"
+            :key="index">
+            <img class="depart-img" :src="$withBase(intro.imgUrl)"/>
+            <p> {{intro.content}} </p>
+          </div>
+        </div>
+        <!-- PC端features块 s -->
+        <!-- <div class="features" v-if="hasFeatures && !isMQMobile">
+          <div
+            class="feature"
+            v-for="(feature, index) in homeData.features"
+            :key="index"
+          >
+            <router-link v-if="feature.link" :to="feature.link">
+              <img
+                class="feature-img"
+                v-if="feature.imgUrl"
+                :src="$withBase(feature.imgUrl)"
+                :alt="feature.title"
+              />
+              <h2>{{ feature.title }}</h2>
+              <p>{{ feature.details }}</p>
+            </router-link>
+            <a v-else href="javascript:;">
+              <img
+                class="feature-img"
+                v-if="feature.imgUrl"
+                :src="$withBase(feature.imgUrl)"
+                :alt="feature.title"
+              />
+              <h2>{{ feature.title }}</h2>
+              <p>{{ feature.details }}</p>
+            </a>
+          </div>
+        </div> -->
+        <!-- PC端features块 e -->
       </div>
+
+      <!-- 移动端features块 s -->
+      <!-- isMQMobile放到v-if上线后会报错 -->
+      <!-- <div class="slide-banner" v-if="hasFeatures" v-show="isMQMobile">
+        <div class="banner-wrapper">
+          <div class="slide-banner-scroll" ref="slide">
+            <div class="slide-banner-wrapper">
+              <div
+                class="slide-item"
+                v-for="(feature, index) in homeData.features"
+                :key="index"
+              >
+                <router-link v-if="feature.link" :to="feature.link">
+                  <img
+                    class="feature-img"
+                    v-if="feature.imgUrl"
+                    :src="$withBase(feature.imgUrl)"
+                    :alt="feature.title"
+                  />
+                  <h2>{{ feature.title }}</h2>
+                  <p>{{ feature.details }}</p>
+                </router-link>
+                <a v-else href="javascript:;">
+                  <img
+                    class="feature-img"
+                    v-if="feature.imgUrl"
+                    :src="$withBase(feature.imgUrl)"
+                    :alt="feature.title"
+                  />
+                  <h2>{{ feature.title }}</h2>
+                  <p>{{ feature.details }}</p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="docs-wrapper">
+            <span
+              class="doc"
+              v-for="(item, index) in homeData.features.length"
+              :key="index"
+              :class="{ active: currentPageIndex === index }"
+            ></span>
+          </div>
+        </div>
+      </div> -->
+      <!-- 移动端features块 e -->
     </div>
     <!-- banner块 e -->
 
@@ -55,11 +131,9 @@
         <!-- 简约版文章列表 -->
         
 
-        <!-- <EventsLecs></EventsLecs> -->
-        <!-- <ArticleLists></ArticleLists> -->
-        <CategoryList :category="mainCategories[0].msg" :categoryName="mainCategories[0].title"></CategoryList>
-        <CategoryList :category="mainCategories[1].msg" :categoryName="mainCategories[1].title"></CategoryList>
-        <CategoryList :category="mainCategories[2].msg" :categoryName="mainCategories[2].title"></CategoryList>
+        <EventsLecs></EventsLecs>
+        <ArticleLists></ArticleLists>
+        
 
       </template>
 
@@ -99,9 +173,8 @@ import Pagination from '@theme/components/Pagination'
 import BloggerBar from '@theme/components/BloggerBar'
 import CategoriesBar from '@theme/components/CategoriesBar'
 import TagsBar from '@theme/components/TagsBar'
-// import EventsLecs from '@theme/components/EventsLecs'
-// import ArticleLists from '@theme/components/ArticleLists'
-import CategoryList from '@theme/components/CategoryList'
+import EventsLecs from '@theme/components/EventsLecs'
+import ArticleLists from '@theme/components/ArticleLists'
 
 const MOBILE_DESKTOP_BREAKPOINT = 720 // refer to config.styl
 
@@ -111,8 +184,7 @@ export default {
   data () {
     return {
       isMQMobile: false,
-      introtype: 0,
-      introid: 0,
+
       slide: null,
       currentPageIndex: 0,
       playTimer: 0,
@@ -122,9 +194,9 @@ export default {
       perPage: 10, // 每页长
       currentPage: 1, // 当前页
       mainCategories: [
-        {msg: 'Event', title: '活动'}, 
-        {msg: 'Lecture', title: '讲座'}, 
-        {msg: 'Article', title: '文章'}]
+        {msg: 'Event'}, 
+        {msg: 'Lecture'}, 
+        {msg: 'Article'}]
     }
   },
   computed: {
@@ -174,7 +246,7 @@ export default {
       };
     }
   },
-  components: { NavLink, MainLayout, PostList, UpdateArticle, BloggerBar, CategoriesBar, TagsBar, Pagination,  CategoryList },
+  components: { NavLink, MainLayout, PostList, UpdateArticle, BloggerBar, CategoriesBar, TagsBar, Pagination, EventsLecs, ArticleLists },
   created () {
     this.total = this.$sortPosts.length
   },
@@ -267,25 +339,6 @@ export default {
         || document.documentElement.scrollTop
         || document.body.scrollTop
     },
-    getDataItem(type, id) {
-      if (type == 0) {
-        return this.homeData.introduction[id]
-      } else {
-        return this.homeData.departments[id]
-      }
-    },
-    addItemCnt() {
-      let len = this.introtype == 0 ? this.homeData.introduction.length : this.homeData.departments.length
-      ++this.introid 
-      if(this.introid == len) 
-        this.introid = 0;
-    }, 
-    subItemCnt() {
-      let len = this.introtype == 0 ? this.homeData.introduction.length : this.homeData.departments.length
-      --this.introid
-      if(this.introid < 0) 
-        this.introid = len - 1;
-    }
   },
 
 };
@@ -295,7 +348,7 @@ export default {
 .home-wrapper
   .banner
     width 100%
-    // min-height 450px
+    min-height 450px
     margin-top $navbarHeight
     color $bannerTextColor
     position relative
@@ -312,13 +365,13 @@ export default {
         text-align center
         margin-top 3rem
         img
-          max-width 60%
-          max-height 120px
+          max-width 100%
+          max-height 240px
           display block
           margin 2rem auto 1.5rem
         h1
           margin 0
-          font-size 1.5rem
+          font-size 3.2rem
         .description, .action
           margin 1.5rem auto
         .description
@@ -338,75 +391,49 @@ export default {
           color #fff
           &:hover
             background-color lighten($accentColor, 10%)
-        #detail-btn 
-          font-size 1.2rem
-          padding .4rem 1.4rem
-          background-color #FEAE1B
-          border-radius .4rem
-          border 2px solid #FEAE1B
-          color white 
-          &:hover 
-            background-color #FEBC43
-            border-color #FEBC43
-      .info-panel 
-        display flex 
-        background-color white 
-        border-radius 5px
-        flex-direction column
-        margin 3rem auto
-        width 70%
-        min-height 20rem 
-        .intro-category 
-          display flex 
-          padding 1rem 1rem 0 1rem
-          background-color #FEBC43
-          border-radius 5px 5px 0 0
-          .intro-category-item
-            padding .2rem .6rem 
-            height 2rem
-            line-height 2rem
-            color gray 
-            &.selected 
-              background-color white
-              color black
-            &:hover 
-              color black
-        .intro-main 
-          display flex 
-          .intro-img-title 
-            margin 10px 0 0 10px
-            flex 220px 0 0
-            display flex     
-            flex-direction column 
-            align-items center
-            .intro-img 
-              display inline-block
-              height 80px
-              width auto
-            h2 
-              border none
-              font-size 1.2rem
-              text-align center
-              // width 150px
-          .intro-content 
-            flex 1
-            margin-right 10px
-        .intro-toggle-button-list 
-          margin-top auto 
-          display flex 
-          justify-content flex-end
-          .toggle-btn  
-            font-weight bold
-            // color white
-            font-size 30px 
-            line-height 30px
-            color white 
-            margin 10px
-            width 30px 
-            height 30px
-            background-color #FEBC43
-            border-radius 3px 
-            text-align center
+      .introduction
+        padding 2rem 0
+        margin 0 3rem
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        justify-content space-around
+        .intro-item
+          flex 40% 0 1
+          animation heart 1.2s ease-in-out 0s infinite alternate
+          animation-play-state paused
+          overflow auto
+          .intro-img
+            float right
+            margin 1rem 2rem 1rem auto
+            width 4rem
+            height 4rem
+          h2
+            margin-top 3rem
+          p
+            border-left 6px solid gray
+            padding-left 2rem
+        .intro-item:hover
+          animation-play-state running
+      .departments 
+        padding 2rem 0
+        margin 0 3rem
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        justify-content space-around
+        .depart-item
+          flex 30% 0 1
+          animation heart 1.2s ease-in-out 0s infinite alternate
+          animation-play-state paused
+          overflow auto
+          .depart-img
+            height 6rem
+          p
+            font-size .9rem
+            color gray
+        .depart-big
+          flex 40% 0 1
       // pc端features
       // .features
       //   padding 2rem 0
