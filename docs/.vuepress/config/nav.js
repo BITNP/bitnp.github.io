@@ -3,15 +3,15 @@ module.exports = [
   { text: '首页', link: '/' },
   {
     text: '活动',
-    link: '/Event/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
+    link: '/categories/?category=Event', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
   },
   {
     text: '讲座',
-    link: '/Lecture/'
+    link: '/categories/?category=Lecture'
   },
   {
     text: '文章',
-    link: '/Article/'
+    link: '/categories/?category=Article'
   },
   {
     text: '服务',

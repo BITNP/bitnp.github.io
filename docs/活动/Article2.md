@@ -1,12 +1,13 @@
 ---
 title: Article2
-date: 2021-09-06
+date: 2021-09-06 00:00:00
 author: hyq
 permalink: /pages/168d5c/
-categories:
+categories: 
   - Article
-tags:
-  - 
+tags: 
+  - null
+sidebar: auto
 ---
 
 test...

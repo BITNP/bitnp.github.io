@@ -1,12 +1,13 @@
 ---
 title: Article1
-date: 2021-09-06
+date: 2021-09-06 00:00:00
 author: py
 permalink: /pages/933ac8/
-categories:
+categories: 
   - Article
-tags:
-  - 
+tags: 
+  - null
+sidebar: auto
 ---
 
 test...

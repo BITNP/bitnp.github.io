@@ -31,6 +31,7 @@ export default {
 
   computed: {
     link () {
+      return this.item.link
       return ensureExt(this.item.link)
     },
 

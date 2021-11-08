@@ -1,11 +1,11 @@
 <template>
   <div class="page-edit">
-    <div class="edit-link" v-if="editLink">
+    <!-- <div class="edit-link" v-if="editLink">
       <a :href="editLink" target="_blank" rel="noopener noreferrer">{{
         editLinkText
       }}</a>
       <OutboundLink />
-    </div>
+    </div> -->
 
     <div class="tags" v-if="$themeConfig.tag !== false && tags && tags[0]">
       <router-link

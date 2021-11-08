@@ -27,7 +27,7 @@
           <p class="action" v-if="homeData.actionText && homeData.actionLink">
             <NavLink class="action-button" :item="actionLink" />
           </p>
-          <button id="detail-btn">了解更多</button>
+          <!-- <button id="detail-btn">了解更多</button> -->
         </header>
         <div class="info-panel">
           <div class="intro-category">
@@ -521,7 +521,7 @@ export default {
       .banner-conent
         .hero
           h1
-            font-size 2.5rem
+            font-size 1.5rem
           .description
             font-size 1rem
         .feature
@@ -557,7 +557,7 @@ export default {
             max-height 160px
             margin 2rem auto 1.2rem
           h1
-            font-size 1.6rem
+            font-size 1.5rem
           h1, .description, .action
             margin 1.2rem auto
           .description

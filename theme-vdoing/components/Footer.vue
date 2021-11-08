@@ -59,7 +59,7 @@ export default {
       return `background: url(${this.$withBase('/img/footerbg.png')}) center center / cover no-repeat`
     },
     footerQRCode() {
-      return this.$withBase('img/QRCode.jpg');
+      return this.$withBase('/img/QRCode.jpg');
     }
   }
 }
@@ -77,6 +77,7 @@ export default {
   .recruiting-info 
     display flex
     justify-content space-around
+    flex-wrap wrap
     img
       margin auto 8em
       flex 2
@@ -84,9 +85,11 @@ export default {
     .img-info
       flex 1
       text-align center
+      min-width 12em
       color white
     .lnks
       flex 1
+      min-width 10em
       .lnk-title
         font-weight bold
         color white
@@ -112,4 +115,14 @@ export default {
 .no-sidebar .footer
   width auto
   padding-left 1.5rem
+@media (max-width 800px) 
+  .footer  
+    .recruiting-info 
+      img 
+        margin-bottom 3em
+@media (max-width 400px)
+  .footer  
+    .recruiting-info 
+      .img-info 
+        margin-bottom 3em
 </style>

@@ -2,7 +2,10 @@
     <div class="article-wrapper">
         <div class="category-title">
             <p>{{this.categoryName}}</p>
-            <p>&gt;更多</p>
+            <router-link :to="'/categories/?category='+categoryName">
+                &gt;更多
+            </router-link>
+            <!-- <p>&gt;更多</p> -->
         </div>      
         <div class="article-group">
             <div class="article-lst post card-box"
@@ -96,7 +99,7 @@ export default {
     border-bottom .1rem solid #ed7e33
     padding-top .5rem
     display flex 
-    p  
+    p, a  
       color #ED7E33
       margin .1rem 0
       &:first-child 

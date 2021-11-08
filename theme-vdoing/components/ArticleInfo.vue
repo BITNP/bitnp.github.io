@@ -17,11 +17,9 @@
           >
           <router-link
             v-else-if="$themeConfig.category !== false"
-            :to="`/categories/?category=${encodeURIComponent(
-              articleInfo.classify1
-            )}`"
+            :to="`/categories/?category=${category}`"
             title="分类"
-            >{{ articleInfo.classify1 }}</router-link
+            >{{ categoryName }}</router-link
           >
           <span v-else>{{ articleInfo.classify1 }}</span>
         </li>
@@ -30,15 +28,13 @@
             v-if="articleInfo.cataloguePermalink"
             :to="articleInfo.cataloguePermalink + '/#' + articleInfo.classify2"
             :title="articleInfo.classify1 + '#' + articleInfo.classify2"
-            >{{ articleInfo.classify2 }}</router-link
+            >{{ categoryName }}</router-link
           >
           <router-link
             v-else-if="$themeConfig.category !== false"
-            :to="`/categories/?category=${encodeURIComponent(
-              articleInfo.classify2
-            )}`"
+            :to="`/categories/?category=${category}`"
             title="分类"
-            >{{ articleInfo.classify2 }}</router-link
+            >{{ categoryName }}</router-link
           >
           <span v-else>{{ articleInfo.classify2 }}</span>
         </li>
@@ -125,6 +121,21 @@ export default {
       this.articleInfo = this.getPageInfo()
     }
   },
+  computed: {
+    category : function() {
+      return this.$frontmatter.categories[0]
+    },
+    categoryName : function() {
+      let e = this.$frontmatter.categories[0]
+      if (e == "Lecture") {
+        return "讲座"
+      } else if(e == "Event") {
+        return "活动"
+      } else {
+        return "文章"
+      }
+    }
+  },
   methods: {
     getPageInfo () {
       const pageInfo = this.$page
@@ -145,6 +156,9 @@ export default {
 
       // 获取页面frontmatter的分类（碎片化文章使用）
       const { categories } = this.$frontmatter
+
+      console.log(classify1 + " " + classify2 + " " + classify3)
+      console.log(categories)
 
       return {
         date,

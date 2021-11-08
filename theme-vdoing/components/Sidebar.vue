@@ -4,15 +4,15 @@
       class="blogger"
       v-if="blogger"
     >
-      <img :src="blogger.avatar" />
+      <!-- <img :src="blogger.avatar" /> -->
       <div class="blogger-info">
-        <h3>{{blogger.name}}</h3>
+        <!-- <h3>{{blogger.name}}</h3> -->
 
-        <div
+        <!-- <div
           class="icons"
           v-if="blogger.social"
-        >
-          <a
+        > -->
+          <!-- <a
             :href="item.link"
             :title="item.title"
             :class="['iconfont', item.iconClass]"
@@ -20,8 +20,9 @@
             :key="index"
             target="_blank"
           ></a>
-        </div>
-        <span v-else>{{blogger.slogan}}</span>
+        </div> -->
+        <!-- <span v-else>{{blogger.slogan}}</span> -->
+        <span>{{blogger.slogan}}</span>
       </div>
     </div>
 
@@ -101,6 +102,12 @@ export default {
         font-size 1.2rem
         padding-right 0.6rem
         color #777
+      span 
+        display block
+        font-weight bold
+        margin 1em auto 
+        text-align center
+        font-size 1.4rem
   .sidebar-slot
     margin-bottom: -.5rem;
     font-size: .85rem;
@@ -112,6 +119,7 @@ export default {
   .sidebar
     .blogger
       display flex
+      justify-content center
     .nav-links
       display block
       .dropdown-wrapper .nav-dropdown .dropdown-item a.router-link-active::after
