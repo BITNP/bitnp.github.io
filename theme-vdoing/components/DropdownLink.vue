@@ -123,6 +123,8 @@ export default {
       vertical-align middle
       margin-top -1px
       margin-left 0.4rem
+    a 
+      border none !important
   .nav-dropdown
     .dropdown-item
       color inherit
