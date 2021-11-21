@@ -1,6 +1,7 @@
 ---
 home: true
 heroImage: /img/web.png
+heroDarkImage: /img/web-dark.png
 heroText: 北京理工大学网络开拓者协会
 tagline: Net Pioneer Association of BIT
 # actionText: 立刻进入 →

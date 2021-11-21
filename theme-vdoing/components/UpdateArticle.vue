@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     topPublishPosts () {
-      return this.$groupPosts.tags['Vue'].filter(post => {
+      return this.posts.filter(post => {
         const { path } = post
         return path !== this.currentPath
       }).slice(0, this.length)

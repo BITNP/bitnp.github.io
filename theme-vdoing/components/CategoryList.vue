@@ -92,7 +92,7 @@ export default {
 <style lang="stylus">
 .article-wrapper
   margin .5rem auto 0 auto
-  max-width .8 * $homePageWidth
+  max-width 85%
   padding 0 0.9rem
   box-sizing border-box
   .category-title

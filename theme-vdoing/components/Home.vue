@@ -14,7 +14,12 @@
       >
         <header class="hero">
           <img
-            v-if="homeData.heroImage"
+            v-if="currThemeType === 'dark'"
+            :src="$withBase(homeData.heroDarkImage)"
+            :alt="homeData.heroAlt"
+          />
+          <img
+            v-else
             :src="$withBase(homeData.heroImage)"
             :alt="homeData.heroAlt"
           />
@@ -108,6 +113,12 @@ const MOBILE_DESKTOP_BREAKPOINT = 720 // refer to config.styl
 BScroll.use(Slide)
 
 export default {
+  props : {
+    themeType : {
+      type : String,
+      default: ''
+    }
+  },
   data () {
     return {
       isMQMobile: false,
@@ -124,7 +135,8 @@ export default {
       mainCategories: [
         {msg: 'Event', title: '活动'}, 
         {msg: 'Lecture', title: '讲座'}, 
-        {msg: 'Article', title: '文章'}]
+        {msg: 'Article', title: '文章'}],
+      themeTypeData: this.themeType
     }
   },
   computed: {
@@ -152,7 +164,7 @@ export default {
         if (this.$themeConfig.bodyBgImg) { // 当有bodyBgImg时，不显示背景
           return ''
         } else { // 网格纹背景
-          return 'background: rgb(40,40,45) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABOSURBVFhH7c6xCQAgDAVRR9A6E4hLu4uLiWJ7tSnuQcIvr2TRYsw3/zOGGEOMIcYQY4gxxBhiDDGGGEOMIcYQY4gxxBhiDLkx52W4Gn1tuslCtHJvL54AAAAASUVORK5CYII=)'
+          return ''
         }
       } else if (bannerBg === 'none') { // 无背景
         if (this.$themeConfig.bodyBgImg) {
@@ -172,6 +184,10 @@ export default {
         link: this.homeData.actionLink,
         text: this.homeData.actionText
       };
+    },
+    currThemeType() {
+      console.log(this.themeType)
+      return this.themeType
     }
   },
   components: { NavLink, MainLayout, PostList, UpdateArticle, BloggerBar, CategoriesBar, TagsBar, Pagination,  CategoryList },
@@ -194,7 +210,7 @@ export default {
       window.addEventListener('resize', () => {
         this.isMQMobile = window.innerWidth < MOBILE_DESKTOP_BREAKPOINT ? true : false;
         if (this.isMQMobile && !this.slide && !this.mark) {
-          this.mark++
+          this.mark++ 
           setTimeout(() => {
             this.init()
           }, 60)
@@ -292,7 +308,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.home-wrapper
+@require '../styles/palette.styl'
   .banner
     width 100%
     // min-height 450px
@@ -300,9 +316,9 @@ export default {
     color $bannerTextColor
     position relative
     overflow hidden
-    background #F1F3F4 !important
+    background-color var(--bodyBg) !important
     .banner-conent
-      color black
+      color var(--textColor)
       max-width $homePageWidth
       margin 0px auto
       position relative
@@ -350,11 +366,11 @@ export default {
             border-color #FEBC43
       .info-panel 
         display flex 
-        background-color white 
+        background-color var(--mainBg)
         border-radius 5px
         flex-direction column
         margin 3rem auto
-        width 70%
+        width 85%
         min-height 20rem 
         .intro-category 
           display flex 
@@ -367,10 +383,10 @@ export default {
             line-height 2rem
             color gray 
             &.selected 
-              background-color white
-              color black
+              background-color var(--mainBg)
+              color var(--textColor)
             &:hover 
-              color black
+              color var(--textColor)
         .intro-main 
           display flex 
           .intro-img-title 

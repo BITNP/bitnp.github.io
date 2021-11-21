@@ -37,7 +37,8 @@
     </Sidebar>
 
     <!-- 首页 -->
-    <Home v-if="$page.frontmatter.home" />
+    <Home v-if="$page.frontmatter.home"
+      :themeType="themeMode" />
 
     <!-- 分类页 -->
     <CategoriesPage v-else-if="$page.frontmatter.categoriesPage" />
