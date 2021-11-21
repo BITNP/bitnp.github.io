@@ -36,8 +36,8 @@
         </header>
         <div class="info-panel">
           <div class="intro-category">
-            <div class="intro-category-item" :class="introtype==0?'selected':''" @click="introtype=0">服务支持</div>
-            <div class="intro-category-item" :class="introtype==1?'selected':''" @click="introtype=1">部门介绍</div>
+            <div class="intro-category-item" :class="introtype==0?'selected':''" @click="introtype=0;introid=0">服务支持</div>
+            <div class="intro-category-item" :class="introtype==1?'selected':''" @click="introtype=1;introid=0">部门介绍</div>
           </div>
           <div class="intro-main">
             <div class="intro-img-title">
