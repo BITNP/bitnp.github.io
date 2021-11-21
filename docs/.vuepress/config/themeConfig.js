@@ -62,19 +62,14 @@ module.exports = {
     icons: [
       {
         iconClass: 'icon-youjian',
-        title: '发邮件',
-        link: 'mailto:894072666@qq.com',
+        title: '合作',
+        link: '517301867@qq.com',
       },
       {
         iconClass: 'icon-github',
         title: 'GitHub',
-        link: 'https://github.com/xugaoyi',
-      },
-      {
-        iconClass: 'icon-erji',
-        title: '听音乐',
-        link: 'https://music.163.com/#/playlist?id=755597173',
-      },
+        link: 'https://github.com/BITNP',
+      }
     ],
   },
   footer: {
