@@ -62,7 +62,7 @@
 
         <!-- <EventsLecs></EventsLecs> -->
         <!-- <ArticleLists></ArticleLists> -->
-        <CategoryList :category="mainCategories[0].msg" :categoryName="mainCategories[0].title"></CategoryList>
+        <!-- <CategoryList :category="mainCategories[0].msg" :categoryName="mainCategories[0].title"></CategoryList> -->
         <CategoryList :category="mainCategories[1].msg" :categoryName="mainCategories[1].title"></CategoryList>
         <CategoryList :category="mainCategories[2].msg" :categoryName="mainCategories[2].title"></CategoryList>
 

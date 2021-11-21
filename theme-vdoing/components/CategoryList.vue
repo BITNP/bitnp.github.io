@@ -2,7 +2,7 @@
     <div class="article-wrapper">
         <div class="category-title">
             <p>{{this.categoryName}}</p>
-            <router-link :to="'/categories/?category='+categoryName">
+            <router-link :to="'/categories/?category='+category">
                 &gt;更多
             </router-link>
             <!-- <p>&gt;更多</p> -->

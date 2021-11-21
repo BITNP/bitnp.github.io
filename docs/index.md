@@ -38,23 +38,6 @@ departments:
   - title: 组织部
     content: 组织部是网络开拓者协会的很重要的部门，内外兼修，掌管着网协的经济大权。内负责与各部门之间的交流合作以及一些日常事务的管理如人员考核，会议记录，内部活动策划，最重要的是我们也管理经济支出。外负责联系社会和学校，主要是拉赞助为网协的一些活动筹集资金，是我们接触社会，了解社会，融入社会的锻炼平台。如果你觉得自己交际能力和语言表达能力还不错，想在一个技术氛围浓厚的组织提升自己的能力，那么组织部将是你的不二选择，欢迎加入我们！
     imgUrl: /img/org.png
-features: # 可选的
-  - title: 前端
-    details: JavaScript、ES6、Vue框架等前端技术
-    link: /web/ # 可选
-    imgUrl: /img/web.png # 可选
-  - title: 页面
-    details: html(5)/css(3)，前端页面相关技术
-    link: /ui/
-    imgUrl: /img/ui.png
-  - title: 技术
-    details: 技术文档、教程、技巧、总结等文章
-    link: /technology/
-    imgUrl: /img/other.png
-  - title: 技术
-    details: 技术文档、教程、技巧、总结等文章
-    link: /technology/
-    imgUrl: /img/other.png
 
 # 文章列表显示方式: detailed 默认，显示详细版文章列表（包括作者、分类、标签、摘要、分页等）| simple => 显示简约版文章列表（仅标题和日期）| none 不显示文章列表
 # postList: simple
