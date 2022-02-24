@@ -2,14 +2,11 @@
   <header class="navbar blur">
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
-    <router-link
-      :to="$localePath"
-      class="home-link"
-    >
+    <router-link :to="$localePath" class="home-link">
       <img
         class="logo"
         v-if="$site.themeConfig.logo"
-        :src="$withBase($site.themeConfig.logo)"
+        :src="$withBase(themeType === 'dark' ? $site.themeConfig.logoDark : $site.themeConfig.logo)"
         :alt="$siteTitle"
       />
       <span
@@ -26,10 +23,7 @@
         'max-width': linksWrapMaxWidth + 'px'
       } : {}"
     >
-      <AlgoliaSearchBox
-        v-if="isAlgoliaSearch"
-        :options="algolia"
-      />
+      <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
       <SearchBox
         v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"
       />
@@ -47,13 +41,20 @@ import NavLinks from '@theme/components/NavLinks.vue'
 export default {
   components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox },
 
-  data () {
+  props: {
+    themeType: {
+      type: String,
+      default: 'light'
+    }
+  },
+
+  data() {
     return {
       linksWrapMaxWidth: null
     }
   },
 
-  mounted () {
+  mounted() {
     const MOBILE_DESKTOP_BREAKPOINT = 719 // refer to config.styl
     const NAVBAR_VERTICAL_PADDING = parseInt(css(this.$el, 'paddingLeft')) + parseInt(css(this.$el, 'paddingRight'))
     const handleLinksWrapWidth = () => {
@@ -69,17 +70,17 @@ export default {
   },
 
   computed: {
-    algolia () {
+    algolia() {
       return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
     },
 
-    isAlgoliaSearch () {
+    isAlgoliaSearch() {
       return this.algolia && this.algolia.apiKey && this.algolia.indexName
     }
   }
 }
 
-function css (el, property) {
+function css(el, property) {
   // NOTE: Known bug, will return 'auto' if style value is 'auto'
   const win = el.ownerDocument.defaultView
   // null means not to return pseudo styles
